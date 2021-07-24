@@ -2,13 +2,13 @@ FROM registry.access.redhat.com/ubi8/ubi-init
 LABEL maintainer="Tim Gruetzmacher"
 ENV container=docker
 
-RUN yum install -y python3 python3-pip sudo
+RUN dnf install -y python38 python38-pip sudo
 
 # Upgrade pip to latest version.
-RUN pip3 install --no-cache-dir --user --upgrade pip
+RUN pip3 install --no-cache-dir --upgrade pip
 
 # Install Ansible via pip.
-RUN pip3 install --no-cache-dir --user ansible cryptography
+RUN pip3 install --no-cache-dir ansible cryptography
 
 # Install Ansible inventory file.
 RUN mkdir -p /etc/ansible \

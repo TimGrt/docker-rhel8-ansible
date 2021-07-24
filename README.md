@@ -10,7 +10,7 @@ A non-priviledged user `ansible` is created with password-less sudo configured.
 
 The following tags are available:
 
-  - `latest`: Latest stable version of Ansible on Python 3
+  - `latest`: Latest stable version of Ansible on Python 3.8
 ## How to Build
 
 To build the image on your own locally, do the following:
