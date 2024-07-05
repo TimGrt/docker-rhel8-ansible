@@ -1,18 +1,16 @@
-FROM registry.access.redhat.com/ubi8/ubi-init
+# hadolint global ignore=DL3007,DL3033
+FROM registry.access.redhat.com/ubi8/ubi-init:latest
 LABEL maintainer="Tim Gruetzmacher"
-ENV container=docker
 
-RUN dnf install -y python38 python38-pip sudo
-
-# Upgrade pip to latest version.
-RUN pip3 install --no-cache-dir --upgrade pip
-
-# Install Ansible via pip.
-RUN pip3 install --no-cache-dir ansible cryptography
-
-# Install Ansible inventory file.
-RUN mkdir -p /etc/ansible \
-    && printf "[local]\nlocalhost ansible_connection=local\n" > /etc/ansible/hosts
+# Install requirements.
+RUN yum -y install rpm dnf-plugins-core \
+ && yum -y update \
+ && yum -y install \
+      initscripts \
+      sudo \
+      which \
+      hostname \
+ && yum clean all
 
 # Create `ansible` user with sudo permissions
 ENV ANSIBLE_USER=ansible
